@@ -1,34 +1,31 @@
-
-        <div class="center">
-            <div class="container">
-                <h2 style="color: #0000ff;">Signup</h2>
-                <form   >
-                    <div class="form-group">
-                       
-                        <input type="text" class="form-control" id="Fname" placeholder="Enter first name" required>
-                    </div>
-                    <div class="form-group">
-                     
-                        <input type="text" class="form-control" id="Lname" placeholder="Enter last name"required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Enter your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" required>
-                    </div>
-                    <div class="form-group">
-                        
-                        <input type="password" class="form-control" id="confirmpassword" placeholder="Enter Confirm password" required>
-                    </div>
-                    <button type="button" id="demo"  class="btn btn-primary">Submit</button>
-                   
-                 
- 
-                </form>
-                <P>Already have an account ?   <button (click)="onLoginClick()">Login</button></P>
-            </div>
+<div class="center">
+    <div class="container">
+      <h2 style="color: #0000ff;">Signup</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+        <div class="form-group">
+          <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="Enter first name" required>
         </div>
-
-
-
+        <div class="form-group">
+          <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Enter last name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your Email" required>
+          <div *ngIf="signupForm.controls['email'].hasError('required')" class="error"></div>   
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="confirmpassword" formControlName="confirmpassword" placeholder="Enter Confirm password" required>
+          <i style="color: red;text-align: initial;" *ngIf="signupForm.hasError('passwordMismatch') && signupForm.invalid">
+            Passwords must match.
+          </i>
+          
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <p>Already have an account? <button (click)="onLoginClick()">Login</button></p>
+    </div>
+  </div>
+  
+  
