@@ -2,15 +2,23 @@
 <div class="center">
     <div class="container">
         <h2>Login</h2>
-        <form>
+        <p  style="color: #f35151;">Please enter your login and password!</p>
+        <br>
+
+        <form [formGroup]="loginForm" (ngSubmit)="logIn()">
             <div class="form-group">
-             <input type="text" class="form-control" id="email" placeholder="Enter your email" required>
+             <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter your email" required>
+           <span style="color: red;" *ngIf="loginForm.controls['email'].dirty && 
+           loginForm.hasError('required','email')">*Email is required</span>
             </div>
             <div class="form-group">
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" required>   
-            </div>
-            <button type="button" id="demo" class="btn-primary">Login</button>
+                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password" required>   
+                    <span style="color: red;" *ngIf="loginForm.controls['password'].dirty && 
+                    loginForm.hasError('required','password')">*Password is required</span>
+                </div>
+            <button type="submit" [disabled]="loginForm.valid" id="demo" class="btn-primary">Login</button>
         </form>
+        <br>
         <a routerLink="/sign-up">Don't have an account ?</a>
 
     </div>
