@@ -1,0 +1,82 @@
+<div class="container">
+    <!-- <div class="header"> -->
+    <nav>
+      <ul>
+        <li>
+            <a href="#" class="logo">
+              <img src="assets/logo.jpg" alt="Logo">
+              <span class="nav-item">Dashboard</span>
+            </a>
+          </li>
+        <li>
+          <!-- <i class="fas fa-home"></i> -->
+          <button class="hover" mat-button [matMenuTriggerFor]="Attendence">
+            <div class="valign-right">
+          <span >Attendence Report</span>
+          
+            </div>
+        </button>
+        </li>
+        <li>
+          <button class="hover" mat-button  [matMenuTriggerFor]="Manager">
+          <span >Manager</span>
+        </button>
+        </li>
+        <li><a href="" class="logout">
+            <button mat-button>Log out</button>
+            <!-- <span class="nav-item">Log out</span> -->
+          </a></li>
+      </ul>
+    </nav>
+    <section class="main">
+      <div class="main-top">
+       
+    <hr>
+    <img src="assets/Attendence.jpg" alt="Attendance Image">
+    <hr>
+      </div>
+       <h1>Attendance Report</h1>
+       <hr>
+      <!-- Your attendance report content goes here -->
+    
+  <kendo-grid  *ngIf="showGrid" [data]="gridData">
+    <kendo-grid-column  field="employeeName" title="EmpName"></kendo-grid-column>
+    <kendo-grid-column  field="designation" title="Designation"></kendo-grid-column>
+    <kendo-grid-column field="date" title="Date"></kendo-grid-column>
+    <kendo-grid-column field="status" title="Status"></kendo-grid-column>
+    <kendo-grid-column field="loginTime" title="Login Time"></kendo-grid-column>
+    <kendo-grid-column field="logoutTime" title="Logout Time"></kendo-grid-column>
+    <kendo-grid-column field="hours" title="Hours"></kendo-grid-column>
+  </kendo-grid>
+  
+    </section>
+    <hr>
+  </div>
+
+
+ <!-- dropdown list for Attendence -->
+<mat-menu #Attendence="matMenu">
+<button class="matbutton" mat-menu-item (click)="selectMonth('January')"> January</button>
+
+<button class="matbutton" mat-menu-item (click)="selectMonth('February')">February</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('March')"> March</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('April')">April</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('May')"> May</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('June')">June</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('July')"> July</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('August')">August</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('September')"> September</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('October')">October</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('November')"> November</button>
+<button class="matbutton" mat-menu-item (click)="selectMonth('December')">December</button>
+</mat-menu>
+ <!-- dropdown list for Manager -->
+<mat-menu #Manager="matMenu">
+    <button class="matbutton" mat-menu-item (click)="selectManager('Nishant')"> Nishant</button>
+    <button  class="matbutton"mat-menu-item (click)="selectManager('Amit')">Amit</button>
+    <button class="matbutton" mat-menu-item (click)="selectManager('Anshul')"> Anshul</button>    
+ </mat-menu>
+
+
+
+  

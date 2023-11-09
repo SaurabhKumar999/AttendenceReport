@@ -1,0 +1,147 @@
+/* <span style="font-family: verdana, geneva, sans-serif;"> import google fonts */
+@import url("");
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background: #dfe9f5;
+}
+.container{
+  display: flex;
+}
+/* Define a class for the header with a background image */
+/* .header {
+    /* background-image: url('../assets/');  */
+    /* background-size: cover;
+    background-position: center;
+    height: 200px; 
+    color: #fff; 
+    text-align: center;
+    padding: 20px;
+  } */
+   
+  /* Style the text inside the header */
+  /* .header h1 {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+  
+  .header .nav-item {
+    font-size: 14px;
+  } */
+  
+nav{
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  background: rgb(181, 179, 231);
+  width: 280px;
+  overflow: hidden;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.logo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+.logo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.logo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+ a{
+  position: relative;
+  color: rgb(70, 67, 67);
+  font-size: 14px;
+  display: table;
+  width: 280px;
+  padding: 10px;
+}
+
+.nav-item{
+  position: relative;
+  top: 12px;
+  
+}
+a:hover{
+  background: #eee;
+}
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+/* Main Section */
+.main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: #f0f0f0; 
+}
+.main-top{
+  display: flex;
+  width: 100%;
+  background-color: #fff; /* Background color for the top container */
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+.hover:hover{
+  background: #d3cbcb;
+}
+
+/* Style the image */
+img {
+  max-width: 100%;
+  height: auto;
+  
+}
+
+/* Style the h1 heading */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 20px 0; /* Adjust the margin as needed */
+}
+
+
+h1:after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid #000; /* Adjust the color and thickness as needed */
+  margin-top: 5px; /* Adjust the distance between the text and the underline as needed */
+}
+
+.matbutton
+{
+ color: rgb(14, 27, 197);
+}
+
+mat-menu-item{
+  margin-left: 40PX;
+}
