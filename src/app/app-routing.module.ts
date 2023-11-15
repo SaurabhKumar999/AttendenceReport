@@ -6,7 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 
 
-const routes: Routes = [{ path: 'Dashboard', component: DashboardComponent }, { path: 'log-in', component: LogInComponent },
+export const routes: Routes = [{ path: 'Dashboard', component: DashboardComponent }, { path: 'log-in', component: LogInComponent },
 { path: 'sign-up', component: SignUpComponent }];
 
 @NgModule({

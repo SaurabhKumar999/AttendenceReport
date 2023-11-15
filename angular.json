@@ -90,6 +90,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               {

@@ -3,15 +3,15 @@
     <nav>
       <ul>
         <li>
-            <a href="#" class="logo">
+            <a  class="logo">
               <img src="assets/logo.jpg" alt="Logo">
               <span class="nav-item">Dashboard</span>
             </a>
           </li>
         <li>
           <!-- <i class="fas fa-home"></i> -->
-          <button class="hover" mat-button [matMenuTriggerFor]="Attendence">
-            <div class="valign-right">
+          <button class="hover"  mat-button (click)="toggleDropdown()">
+            <div >
           <span >Attendence Report</span>
           
             </div>
@@ -22,35 +22,56 @@
           <span >Manager</span>
         </button>
         </li>
-        <li><a href="" class="logout">
+        <li><a class="logout">
             <button mat-button>Log out</button>
             <!-- <span class="nav-item">Log out</span> -->
           </a></li>
       </ul>
     </nav>
     <section class="main">
-      <div class="main-top">
-       
+      <div class="main-top"> 
     <hr>
     <img src="assets/Attendence.jpg" alt="Attendance Image">
     <hr>
+    <span *ngIf="showDropdown">
+      <button style="margin-top: 130px;color: blue; text-align: justify;" class="hover" mat-button [matMenuTriggerFor]="Attendence"><h3><b>Monthly Attendance</b></h3></button>
+      <!-- Add other buttons or content as needed -->
+      <button style="margin-top: 130px;color: blue; text-align: justify;" class="hover" mat-button [matMenuTriggerFor]="Manager">
+        <h3><b>Users</b></h3>
+      </button>
+    </span>
       </div>
-       <h1>Attendance Report</h1>
-       <hr>
-      <!-- Your attendance report content goes here -->
+  </section>
     
-  <kendo-grid  *ngIf="showGrid" [data]="gridData">
-    <kendo-grid-column  field="employeeName" title="EmpName"></kendo-grid-column>
-    <kendo-grid-column  field="designation" title="Designation"></kendo-grid-column>
-    <kendo-grid-column field="date" title="Date"></kendo-grid-column>
-    <kendo-grid-column field="status" title="Status"></kendo-grid-column>
-    <kendo-grid-column field="loginTime" title="Login Time"></kendo-grid-column>
-    <kendo-grid-column field="logoutTime" title="Logout Time"></kendo-grid-column>
-    <kendo-grid-column field="hours" title="Hours"></kendo-grid-column>
-  </kendo-grid>
+      
+      
   
-    </section>
-    <hr>
+   <!-- Your attendance report content goes here -->
+   <div *ngIf="showTable" [data]class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>EmpName</th>
+          <th>Designation</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Login Time</th>
+          <th>Logout Time</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of gridData">
+          <td>{{ record.employeeName }}</td>
+          <td>{{ record.designation }}</td>
+          <td>{{ record.date | date }}</td>
+          <td>{{ record.status }}</td>
+          <td>{{ record.loginTime | date }}</td>
+          <td>{{ record.logoutTime | date }}</td>
+          <td>{{ record.hours }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 

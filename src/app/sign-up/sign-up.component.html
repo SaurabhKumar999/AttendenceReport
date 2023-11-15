@@ -1,35 +1,44 @@
 <div class="center">
-    <div class="container">
+  <div class="container">
       <h2 style="color: #0000ff;">Signup</h2>
-      <p  style="color: #f35151;">Register yourself by filling below details!</p>
-      <br>
-      <form [formGroup]="signupForm" (ngSubmit)="signUp()">
-        <div class="form-group">
-            <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="Enter first name" required>
-            <span style="color: red;" *ngIf="signupForm.controls['firstname'].dirty && 
-            signupForm.hasError('required','firstname')">*First name is required</span> 
-        </div>
-        <div class="form-group">
-               <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Enter last name" required>
-               <span style="color: red;" *ngIf="signupForm.controls['lastname'].dirty && 
-               signupForm.hasError('required','lastname')">*First name is required</span> 
-            </div>
-        <div class="form-group">
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your Email" required>
-          <span style="color: red;" *ngIf="signupForm.controls['email'].dirty && 
-          signupForm.hasError('required','email')">*Email is required</span>    
-            </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="confirmpassword" formControlName="confirmpassword" placeholder="Enter Confirm password" required>
-          <i style="color: red;" *ngIf="signupForm.hasError('passwordMismatch') && signupForm.invalid">
-            *Passwords must match.
-          </i>
-          
-        </div>
-        <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary">Submit</button>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+
+              <input type="text" class="form-control" id="Fname" placeholder="Enter first name" formControlName="firstName" required>
+              <i style="color: tomato;" *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+                  Please enter your first name.
+              </i>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" id="Lname" placeholder="Enter last name" formControlName="lastName" required>
+
+              <i style="color: tomato;" *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+                  Please enter your last name.
+              </i>
+          </div>
+          <div class="form-group">
+              <input type="email" class="form-control" id="email" placeholder="Enter your Email" formControlName="email" required>
+              <i style="color: tomato;" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                  Please enter a valid email address.
+              </i>
+          </div>
+          <div class="form-group">
+              <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Enter password">
+              <i style="color: tomato;" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                  Password must be at least 6 characters long, contain at least one symbol, and one uppercase letter.
+              </i>
+          </div>
+
+          <div class="form-group">
+              <input type="password" class="form-control" formControlName="confirmPassword" id="confirmpassword" placeholder="Confirm password" required="">
+              <i style="color: tomato;" *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+                  Please confirm your password.
+              </i>
+              <i style="color: tomato;" *ngIf="signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value && signupForm.get('confirmPassword')?.touched">
+                  Passwords do not match.
+              </i>
+          </div>
+          <button type="submit" [disabled]="!signupForm.valid" class="btn-primary">Sign Up</button>
       </form>
       <br>
       <a routerLink="/log-in">Already have an account?</a>
