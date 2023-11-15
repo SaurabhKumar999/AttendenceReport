@@ -1,6 +1,6 @@
 /* Center the content */
 .center {
-  background-image: url('/src/assets/Attendence.jpg');
+  /* background-image: url('/src/assets/Attendence.jpg'); */
     display: flex;
     justify-content: center;
     align-items: center;

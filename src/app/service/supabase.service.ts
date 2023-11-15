@@ -23,12 +23,34 @@ export class SupabaseService {
   async signIn(email: string, password: string) {
     return this.supabase.auth.signInWithPassword({email,password})
   }
-
-  // async signOut() {
+  async checkUserExistence(email: string): Promise<boolean> {
+    try {
+      const { data, error } = await this.supabase
+        .from('Users')
+        .select('id')
+        .eq('email', email);
   
-  // }
-
-  // getAuthState() {
-  //   return this.supabase.auth.session();
-  // }
+      if (error) {
+        console.error('Error checking user existence:', error);
+  
+        // alert('An error occurred while checking user existence. Please try again.');
+        // throw error;
+      }
+      if (data && data.length > 0) {
+        // User with the given email already exists
+        alert('User is already registered.');
+        return true;
+      } else {
+        // User with the given email does not exist
+        return false;
+      }
+    } catch (error) {
+      console.error('Unexpected error checking user existence:', error);
+  
+      alert('An unexpected error occurred. Please try again.');
+      throw error;
+    }
+  }
 }
+
+

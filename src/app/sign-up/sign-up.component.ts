@@ -28,13 +28,57 @@ export class SignUpComponent {
         Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9a-zA-Z]).{6,}$/),
       ]]    });
   }
+  // onSubmit() {
+  //   this.auth.signUp(this.signupForm.value.email, this.signupForm.value.password)
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.data.user && res.data.user.role === "authenticated") {
+  //         // User successfully signed up
+  //         this.router.navigate(["/log-in"]);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       if (error.message && error.message.includes('Unique')) {
+  //         // User already exists, handle the error accordingly
+  //         alert('User already exists. Please choose a different email.');
+  //       } else {
+  //         // Handle other errors here
+  //       }
+  //     });
+  // }
   onSubmit() {
-   this.auth.signIn(this.signupForm.value.email,this.signupForm.value.password)
-   .then((res) => {
-    console.log(res);
-   })
-   .catch((err) =>{
-    console.log(err);
-   });
+    const email = this.signupForm.value.email;
+    const password = this.signupForm.value.password;
+  
+    // Check if the user already exists before attempting to sign up
+    this.auth.checkUserExistence(email)
+      .then((exists) => {
+        if (exists) {
+          // User already exists, show an error or take appropriate action
+          alert("User already exists. Please choose a different email.");
+        } else {
+          // User doesn't exist, proceed with sign-up
+          this.auth.signUp(email, password)
+            .then((res) => {
+              console.log(res);
+              if (res.data.user && res.data.user.role === "authenticated") {
+                // User successfully signed up
+                this.router.navigate(["/log-in"]);
+              }
+            })
+            .catch((error) => {
+              // Handle sign-up error
+              console.error("Sign-up failed:", error);
+            });
+        }
+      })
+      .catch((error) => {
+        // Handle user existence check error
+        console.error("Error checking user existence:", error);
+        alert('user is already registered');
+
+      });
   }
+  
 }

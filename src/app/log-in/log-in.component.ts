@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { SupabaseService } from '../service/supabase.service';
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class LogInComponent {
   loginForm: FormGroup;
   
-  constructor(private formBuilder: FormBuilder,private router: Router) {
+  constructor(private formBuilder: FormBuilder,private router: Router, private auth: SupabaseService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
@@ -21,13 +22,21 @@ export class LogInComponent {
      });
   }
   
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-    
-      console.log('Login successfully!', this.loginForm.value);
-    } else {
-      
-      this.loginForm.markAllAsTouched();
-    }
-  }
-}
+  onSubmit() {
+    debugger
+      this.auth.signIn(this.loginForm.value.email,this.loginForm.value.password)
+      .then((res) => {
+       console.log(res);
+       if(res.data.user!.role==="authenticated"){
+        this.router.navigate(["/Dashboard"])
+       }
+      })
+      .catch((err) =>{
+       console.log(err);
+      //  alert('Something went wrong!please try again.');
+      });
+     }
+ } 
+  
+
+

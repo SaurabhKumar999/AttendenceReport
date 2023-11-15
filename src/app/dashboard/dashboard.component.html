@@ -18,12 +18,12 @@
         </button>
         </li>
         <li>
-          <button class="hover" mat-button  [matMenuTriggerFor]="Manager">
+          <!-- <button class="hover" mat-button  [matMenuTriggerFor]="Manager">
           <span >Manager</span>
-        </button>
+        </button> -->
         </li>
         <li><a class="logout">
-            <button mat-button>Log out</button>
+            <button mat-button (click)="logout()">Log out</button>
             <!-- <span class="nav-item">Log out</span> -->
           </a></li>
       </ul>
@@ -33,19 +33,35 @@
     <hr>
     <img src="assets/Attendence.jpg" alt="Attendance Image">
     <hr>
-    <span *ngIf="showDropdown">
-      <button style="margin-top: 130px;color: blue; text-align: justify;" class="hover" mat-button [matMenuTriggerFor]="Attendence"><h3><b>Monthly Attendance</b></h3></button>
-      <!-- Add other buttons or content as needed -->
-      <button style="margin-top: 130px;color: blue; text-align: justify;" class="hover" mat-button [matMenuTriggerFor]="Manager">
-        <h3><b>Users</b></h3>
-      </button>
-    </span>
+  
+      </div>
+      <div class="selectdrop">
+        <section>
+          <span *ngIf="showDropdown" class="button-dropdowns">
+            <mat-form-field>
+              <mat-label>Select Month</mat-label>
+              <mat-select [(ngModel)]="selectedMonth" (ngModelChange)="generateReport()" name="selectedMonth"
+                style=" color: blue; text-align: justify;">
+                <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field>
+              <mat-label>Select Employee</mat-label>
+              <mat-select [(ngModel)]="selectedEmployee" (ngModelChange)="generateReport()" name="selectedEmployee"
+                style=" color: blue; text-align: justify;" class="hover">
+                <mat-option *ngFor="let employee of employeeData" [value]="employee.id">{{employee.employeeName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+          
+          </section>
       </div>
   </section>
-    
-      
-      
-  
+ 
+
+
+
    <!-- Your attendance report content goes here -->
    <div *ngIf="showTable" [data]class="table-container">
     <table class="table">
@@ -66,8 +82,8 @@
           <td>{{ record.designation }}</td>
           <td>{{ record.date | date }}</td>
           <td>{{ record.status }}</td>
-          <td>{{ record.loginTime | date }}</td>
-          <td>{{ record.logoutTime | date }}</td>
+          <td>{{ record.loginTime |date:'shortDate'}}</td>
+          <td>{{ record.logoutTime | date:'shortDate' }}</td>
           <td>{{ record.hours }}</td>
         </tr>
       </tbody>
@@ -76,7 +92,7 @@
 
 
  <!-- dropdown list for Attendence -->
-<mat-menu #Attendence="matMenu">
+<!-- <mat-menu #Attendence="matMenu">
 <button class="matbutton" mat-menu-item (click)="selectMonth('January')"> January</button>
 
 <button class="matbutton" mat-menu-item (click)="selectMonth('February')">February</button>
@@ -90,13 +106,13 @@
 <button class="matbutton" mat-menu-item (click)="selectMonth('October')">October</button>
 <button class="matbutton" mat-menu-item (click)="selectMonth('November')"> November</button>
 <button class="matbutton" mat-menu-item (click)="selectMonth('December')">December</button>
-</mat-menu>
+</mat-menu>-->
  <!-- dropdown list for Manager -->
-<mat-menu #Manager="matMenu">
+<!-- <mat-menu #Manager="matMenu">
     <button class="matbutton" mat-menu-item (click)="selectManager('Nishant')"> Nishant</button>
     <button  class="matbutton"mat-menu-item (click)="selectManager('Amit')">Amit</button>
     <button class="matbutton" mat-menu-item (click)="selectManager('Anshul')"> Anshul</button>    
- </mat-menu>
+ </mat-menu> -->
 
 
 
