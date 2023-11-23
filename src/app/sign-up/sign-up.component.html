@@ -1,49 +1,52 @@
+<body>
 <div class="center">
   <div class="container">
-      <h2 style="color: #0000ff;">Signup</h2>
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
+    <h2 style="color: #0000ff;">Signup</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+  <label for="firstName">First Name<span style="color: red;">*</span></label>
+  <input type="text" class="form-control" id="Fname" formControlName="firstName" placeholder="Enter first name" required maxlength="25">
+  <i style="color: tomato;" *ngIf="signupForm.get('firstName')?.hasError('alphanumeric') && signupForm.get('firstName')?.touched">
+    Please enter a valid first name (alphabetical characters only).
+  </i>
+</div>
 
-              <input type="text" class="form-control" id="Fname" placeholder="Enter first name" formControlName="firstName" required>
-              <i style="color: tomato;" *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
-                  Please enter your first name.
-              </i>
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" id="Lname" placeholder="Enter last name" formControlName="lastName" required>
+<div class="form-group">
+  <label for="lastName">Last Name<span style="color: red;">*</span></label>
+  <input type="text" class="form-control" id="Lname" formControlName="lastName" placeholder="Enter last name" required maxlength="25">
+  <i style="color: tomato;" *ngIf="signupForm.get('lastName')?.hasError('alphanumeric') && signupForm.get('lastName')?.touched">
+    Please enter a valid last name (alphabetical characters only).
+  </i>
+</div>
 
-              <i style="color: tomato;" *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
-                  Please enter your last name.
-              </i>
-          </div>
-          <div class="form-group">
-              <input type="email" class="form-control" id="email" placeholder="Enter your Email" formControlName="email" required>
-              <i style="color: tomato;" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
-                  Please enter a valid email address.
-              </i>
-          </div>
-          <div class="form-group">
-              <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Enter password">
-              <i style="color: tomato;" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
-                  Password must be at least 6 characters long, contain at least one symbol, and one uppercase letter.
-              </i>
-          </div>
-
-          <div class="form-group">
-              <input type="password" class="form-control" formControlName="confirmPassword" id="confirmpassword" placeholder="Confirm password" required="">
-              <i style="color: tomato;" *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
-                  Please confirm your password.
-              </i>
-              <i style="color: tomato;" *ngIf="signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value && signupForm.get('confirmPassword')?.touched">
-                  Passwords do not match.
-              </i>
-          </div>
-          <button type="submit" [disabled]="!signupForm.valid" class="btn-primary">Sign Up</button>
-      </form>
-      <br>
-      <a routerLink="/log-in">Already have an account?</a>
-     
-    </div>
+      <div class="form-group">
+        <label for="email">Email<span style="color: red;">*</span></label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your Email" required maxlength="50">
+        <i style="color: tomato;" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+          Please enter a valid email address.
+        </i>
+      </div>
+      <div class="form-group">
+        <label for="password">Password<span style="color: red;">*</span></label>
+        <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Enter password" required maxlength="25">
+        <i style="color: tomato;" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+          Password must be at least 6 characters long, contain at least one special charectors, and one capital letter.
+        </i>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password<span style="color: red;">*</span></label>
+        <input type="password" class="form-control" formControlName="confirmPassword" id="confirmpassword" placeholder="Confirm password" required maxlength="25">
+        <i style="color: tomato;" *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+          Please confirm your password.
+        </i>
+        <i style="color: tomato;" *ngIf="signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value && signupForm.get('confirmPassword')?.touched">
+          Passwords do not match.
+        </i>
+      </div>
+      <button type="submit" [disabled]="!signupForm.valid" class="btn-primary">Sign Up</button>
+    </form>
+    <br>
+    <a routerLink="/log-in">Already have an account?</a>
   </div>
-  
-  
+</div>
+</body>

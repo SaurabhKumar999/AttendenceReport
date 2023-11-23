@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { SupabaseService } from '../service/supabase.service';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { createClient, PostgrestError} from '@supabase/supabase-js';
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -10,10 +10,13 @@ import { SupabaseService } from '../service/supabase.service';
 })
 export class LogInComponent {
   loginForm: FormGroup;
-  
-  constructor(private formBuilder: FormBuilder,private router: Router, private auth: SupabaseService) {
+  errorMessage = ''
+  invalidCredentials: boolean = false;
+
+
+  constructor(private formBuilder: FormBuilder,private router: Router) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, this.customEmailValidator()]],
       password: ['', [
         Validators.required,
         Validators.minLength(6),
@@ -21,21 +24,46 @@ export class LogInComponent {
       ]]   
      });
   }
-  
-  onSubmit() {
+  customEmailValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const emailPattern = /^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z]+\.[a-zA-Z]+$/;
+      const isValid = emailPattern.test(control.value);
+      return isValid ? null : { 'emailFormat': true };
+    };
+  }
+  async onSubmit() {
     debugger
-      this.auth.signIn(this.loginForm.value.email,this.loginForm.value.password)
-      .then((res) => {
-       console.log(res);
-       if(res.data.user!.role==="authenticated"){
-        this.router.navigate(["/Dashboard"])
-       }
-      })
-      .catch((err) =>{
-       console.log(err);
-      //  alert('Something went wrong!please try again.');
-      });
-     }
+    // Supabase configuration
+    const supabaseUrl = 'https://euwxylmgbqnxgkcsmwpd.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1d3h5bG1nYnFueGdrY3Ntd3BkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk5ODA2ODQsImV4cCI6MjAxNTU1NjY4NH0.KPPvqTb39L0xHA7G0kqf9yknLKfNH7OwDfXeQ3fENXI';
+    const supabase = createClient(supabaseUrl, supabaseKey);
+ 
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    });
+
+    if (data) {
+      const { data, error } = await supabase
+        .from('Attendence')
+        .select()
+        .eq('email', this.loginForm.value.email)
+        .single();
+
+      if (error && (error as PostgrestError).code !== '23505') {
+        this.errorMessage = 'Invalid credentials. Please try again.';
+      } else {
+       // Store user information in local storage
+       localStorage.setItem('firstName', data.firstName);
+       localStorage.setItem('email', data.email);
+        this.router.navigate(['/Dashboard']);
+      }
+    } else {
+      this.errorMessage = 'Invalid credentials. Please try again.';
+    }
+  }
+  
+  
  } 
   
 

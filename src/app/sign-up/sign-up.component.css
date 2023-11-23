@@ -1,10 +1,20 @@
 /* Center the content */
 
+body {
+  background-image: url('./../../assets/p5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  /* margin-right: 300px; */
 }
 
 
@@ -13,22 +23,33 @@
 .container {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   max-width: 400px;
+  width: 300px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+
 }
 
-
-/* Style the form elements */
-
 .form-group {
-  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  /* font-weight: bold; */
 }
 
 input.form-control {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -74,6 +95,7 @@ P {
 form {
   max-width: 400px;
   margin: auto;
+  width: 300px;
 }
 
 div {

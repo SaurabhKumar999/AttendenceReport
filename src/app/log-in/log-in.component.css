@@ -1,13 +1,32 @@
 /* Center the content */
+body {
+    background-image: url('./../../assets/p5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
 .center {
   /* background-image: url('/src/assets/Attendence.jpg'); */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
   }
 
+/* login.component.css */
 
+  .label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  form {
+    max-width: 400px;
+    margin: auto;
+    width: 300px;
+  }
 
 /* Style the container */
 
@@ -19,15 +38,21 @@
     border-radius: 10px;
     max-width: 500px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
 }
 
 
 /* Style the form elements */
-
 .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 15px;
-}
-
+  }
 input.form-control {
     width: 90%;
     padding: 10px;
@@ -74,11 +99,6 @@ P {
 
 div {
     margin-bottom: 10px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
 }
 
 input[type="email"],

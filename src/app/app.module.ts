@@ -19,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
- 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import{ AttendenceDashboardComponent } from './attendence-dashboard/attendence-dashboard.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
     DashboardComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    AttendenceDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatPaginatorModule
     
   ],
   providers: [],

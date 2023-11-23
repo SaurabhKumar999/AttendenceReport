@@ -8,17 +8,18 @@ import { catchError } from 'rxjs/operators';
 })
 export class AttendenceService {
  
-private baseUrl = 'https://localhost:7211/api/Attendence';
 constructor(private http: HttpClient) { }
  
-getAllData(): Observable<string[]> {
-  const url = `${this.baseUrl}/GetAllAttendence`; 
-  return this.http.get<string[]>(url);
+
+getAllData(){
+  return this.http.get('https://localhost:7290/api/Attendence/GetAllAttendence');
 }
 
-getAllEmployees(): Observable<any[]> {
-  const url = `${this.baseUrl}/GetAllAttendence`;
-  return this.http.get<any[]>(url);
+getAllEmployees(){
+  return this.http.get('https://localhost:7290/api/Attendence/all-Employeenames');
+}
+getMonths(){
+  return this.http.get('https://localhost:7290/api/Attendence/all-months');
 }
 }
 
