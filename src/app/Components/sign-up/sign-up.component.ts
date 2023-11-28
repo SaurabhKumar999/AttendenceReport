@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { Router } from '@angular/router';
 import { AbstractControl, ValidatorFn,} from '@angular/forms';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { PostgrestError } from '@supabase/supabase-js';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class SignUpComponent {
   private supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1d3h5bG1nYnFueGdrY3Ntd3BkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk5ODA2ODQsImV4cCI6MjAxNTU1NjY4NH0.KPPvqTb39L0xHA7G0kqf9yknLKfNH7OwDfXeQ3fENXI';
   private supabase: SupabaseClient;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private snackBar: MatSnackBar) {
     this.signupForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.maxLength(25), this.alphanumericValidator()]],
       lastName: ['', [Validators.required, Validators.maxLength(25), this.alphanumericValidator()]],
@@ -48,9 +50,15 @@ export class SignUpComponent {
       return isValid ? null : { 'emailFormat': true };
     };
   }
+  showSnackBar(message: string, panelClass: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      verticalPosition: 'top',
+      panelClass: [panelClass],
+    });
+  }
    // Method to handle form submission
    async onSubmit() {
-    debugger
     if (this.signupForm.valid) {
       try {
         const emailChecker = await this.supabase
@@ -60,7 +68,8 @@ export class SignUpComponent {
           .single();
 
         if (emailChecker.data) {
-          alert('Email is already registered. Please try again with a different email.');
+       
+          this.showSnackBar('Email is already registered. Please try again with a different email.', 'snackbar-error');
         } else {
           const { data, error } = await this.supabase.auth.signUp({
             email: this.signupForm.value.email,
@@ -68,18 +77,20 @@ export class SignUpComponent {
           });
 
           if (error) {
-            alert(error.message);
+            this.showSnackBar(error.message, 'snackbar-error');
           } else if (data) {
             const { firstName, lastName, email, password } = this.signupForm.value;
             this.signUpToSupabase(firstName, lastName, email, password);
-              // Store user information in local storage
-          localStorage.setItem('firstName', firstName);
-          localStorage.setItem('email', email);
+          //     // Store user information in local storage
+          // localStorage.setItem('firstName', firstName);
+          // localStorage.setItem('email', email);
+          this.showSnackBar('Sign-up successful! Redirecting to login page.', 'snackbar-success');
             this.router.navigate(['/log-in']);
           }
         }
       } catch (error) {
         console.error('Error during sign-up:', error);
+        this.showSnackBar('An error occurred during sign-up. Please try again.', 'snackbar-error');
       }
     }
   }

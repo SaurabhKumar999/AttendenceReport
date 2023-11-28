@@ -1,0 +1,93 @@
+body {
+    background-image: url('./../../assets/b5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .logo{
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+  }
+  .logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  .logo span{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+   a{
+    position: relative;
+    font-size: 14px;
+    display: table;
+    width: 290px;
+    padding: 10px;
+  }
+  h1{
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+  
+/* Styles for devices with a screen width up to 600 pixels (typical for mobile devices) */
+@media screen and (max-width: 600px) {
+    .fullheight {
+      background-color: lightblue;
+    }
+  
+    .main-top {
+      padding: 20px;
+    }
+  
+    .main img {
+      width: 100%;
+    }
+  
+    .selectdrop {
+      padding: 10px;
+    }
+  }
+  
+  /* Styles for devices with a screen width between 601 pixels and 1024 pixels (typical for tablets) */
+  @media screen and (min-width: 601px) and (max-width: 1024px) {
+    .fullheight {
+      background-color: lightgreen;
+    }
+  
+    .main-top {
+      padding: 30px;
+    }
+  
+    .main img {
+      width: 80%;
+    }
+  
+    .selectdrop {
+      padding: 20px;
+    }
+  }
+  
+  /* Styles for devices with a screen width greater than 1024 pixels (typical for laptops and desktops) */
+  @media screen and (min-width: 1025px) {
+    .fullheight {
+      background-color: lightcoral;
+    }
+  
+    .main-top {
+      padding: 40px;
+    }
+  
+    .main img {
+      width: 60%;
+    }
+  
+    .selectdrop {
+      padding: 30px;
+    }
+  }

@@ -19,6 +19,10 @@
             </div>
             <button type="submit" [disabled]="!loginForm.valid" class="btn-primary">Login</button>
         </form>
+           <!-- Display error message -->
+      <!-- <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div> -->
         <br>
         <a routerLink="/sign-up">Don't have an account ?</a>
 

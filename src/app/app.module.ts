@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LogInComponent } from './log-in/log-in.component';
+import { LogInComponent } from './Components/log-in/log-in.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +20,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import{ AttendenceDashboardComponent } from './attendence-dashboard/attendence-dashboard.component';
+import{ AttendenceDashboardComponent } from './Components/attendence-dashboard/attendence-dashboard.component';
 
 
 @NgModule({

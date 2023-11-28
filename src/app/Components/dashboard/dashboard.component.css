@@ -1,5 +1,3 @@
-@import url("");
-
 * {
   margin: 0;
   padding: 0;
@@ -12,17 +10,34 @@
 
 body {
   background: #dfe9f5;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .container {
   display: flex;
+  margin: 0 auto;
+}
+
+.scrollable-container {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: -55px;
 }
 
 .fullhight {
   height: 100vh;
+  
+}
+
+.hover {
+  margin-top: 30px;
+  margin-left: 30px;
+  background-color: rgb(191, 190, 228);
 }
 
 nav {
+  min-height: 500px;
   position: relative;
   top: 0;
   bottom: 0;
@@ -65,6 +80,7 @@ a {
 .nav-item {
   position: relative;
   top: 12px;
+  color: rgb(36, 36, 37);
 
 }
 
@@ -72,10 +88,6 @@ a:hover {
   background: #eee;
 }
 
-.logout {
-  position: absolute;
-  bottom: 0;
-}
 
 /* Main Section */
 .main {
@@ -104,7 +116,7 @@ a:hover {
 }
 
 .hover:hover {
-  background: #d3cbcb;
+  background: rgb(203, 208, 211);
 }
 
 /* Style the image */
@@ -137,20 +149,40 @@ h1:after {
 mat-menu-item {
   margin-left: 40PX;
 }
+/* Add this to your CSS or SCSS file */
+.button-content {
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
 
-
-
-.spacer {
-  flex-grow: 1;
 }
 
-.logout-button {
-  font-size: 15px;
-  color: #fff;
-  background-color: #1976D2;
+.material-icons {
+  font-size: 24px;
+}
+
+h3 {
+  margin-top: 18px;
+
+}
+
+.logout {
+  background-color: rgb(36, 36, 37);
+  color: white;
+  border: none;
+  padding: 1px 1px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  font-size: 10px;
   border: #000000;
-  margin-left: 10px;
+  margin-top: 420px;
 }
+
+.logout:hover {
+  background-color: #0e5aa7;
+}
+
 
 
 .mat-nav-list a {
@@ -187,13 +219,13 @@ mat-menu-item {
   height: 100vh;
 }
 
-/* Style for the toolbar */
+
 .mat-toolbar {
   background-color: #1976D2;
   color: #fff;
 }
 
-/* Style for the button containers */
+
 .button-dropdowns {
   margin: 20px;
 }
@@ -281,10 +313,10 @@ th {
 }
 
 
+
 .table tr:hover {
   background-color: #f0f0f0;
 }
-
 
 
 
@@ -311,4 +343,39 @@ th {
 
 .table tbody tr:hover {
   background-color: #f2f2f2;
+}
+
+.logout {
+  text-decoration: none;
+}
+
+button.mat-icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+span.material-icons {
+  font-size: 24px;
+}
+
+span {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .fullheight {
+    background-color: lightblue;
+  }
+
+  .main-top {
+    padding: 20px;
+  }
+
+  .main img {
+    width: 100%;
+  }
 }

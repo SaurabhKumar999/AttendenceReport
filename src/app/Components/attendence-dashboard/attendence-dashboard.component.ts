@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AttendenceService } from '../service/attendence.service';
-import { AttendenceRecord } from '../model';
+import { AttendenceService } from '../../Services/service/attendence.service';
+import { AttendenceRecord } from '../../model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';

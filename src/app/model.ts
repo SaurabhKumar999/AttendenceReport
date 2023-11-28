@@ -1,13 +1,13 @@
 export interface AttendenceRecord {
-  Id:number,
+    Id:number,
     EmpId: number ,
-     EmpName: string,
+    EmpName: string,
     Designation: string ,
     Date: Date ,
     Status: string,
-     LoginTime: Date,
+    LoginTime: Date,
     LogoutTime: Date,
-     Hours: Date,
-     month: string
+    Hours: Date,
+    month: string
  
    }

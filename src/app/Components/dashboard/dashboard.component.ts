@@ -1,16 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AttendenceService } from '../service/attendence.service';
+import { AttendenceService } from '../../Services/service/attendence.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SupabaseService } from '../service/supabase.service';
-import { AttendenceRecord } from '../model';
+import { SupabaseService } from '../../Services/service/supabase.service';
+import { AttendenceRecord } from '../../model';
+import { createClient } from '@supabase/supabase-js';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
 
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  // standalone: true,
 })
 export class DashboardComponent implements OnInit {
   months: string[] = [];
@@ -22,19 +25,19 @@ export class DashboardComponent implements OnInit {
   gridData: any[] = [];
   attendanceForm: FormGroup | any;
   email: string | null = null;
-  firstName: string| null=null;
+  firstName: string | null = null;
 
-  constructor(private formBuilder: FormBuilder, private routes: Router, private serve: AttendenceService,private auth: SupabaseService) {
+  constructor(private formBuilder: FormBuilder, private routes: Router,   private snackBar: MatSnackBar, private serve: AttendenceService, private auth: SupabaseService) {
     this.attendanceForm = this.formBuilder.group({
       selectedMonth: [''],
       selectedEmployee: ['']
     });
-    this.firstName = localStorage.getItem('firstName');
-    this.email = localStorage.getItem('email');
+   
   }
 
   async ngOnInit(): Promise<void> {
-  
+   
+    // this.fetchFirstName();
     // Populate employee dropdown with unique names
     this.serve.getAllData().subscribe((result) => {
       if (Array.isArray(result)) {
@@ -44,8 +47,18 @@ export class DashboardComponent implements OnInit {
     });
     this.getMonths();
   }
-    // Fetch months and employees data during component initialization
-  getMonths(){
+
+  showSnackBar(message: string, panelClass: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      verticalPosition: 'top',
+      panelClass: [panelClass],
+    });
+  }
+
+  
+  // Fetch months and employees data during component initialization
+  getMonths() {
     this.serve.getMonths().subscribe(
       (result) => {
         this.months = result as any;
@@ -56,29 +69,38 @@ export class DashboardComponent implements OnInit {
     );
   }
   // Inside your component class
-getShortName(email: string): string {
-  const atIndex = email.indexOf('@');
-  if (atIndex !== -1) {
-    return email.substring(0, atIndex);
+  getShortName(email: string): string {
+    const atIndex = email.indexOf('@');
+    if (atIndex !== -1) {
+      return email.substring(0, atIndex);
+    }
+    return email;
   }
-  return email;
-}
 
   // Function to generate report based on the selected month
-  generateMReport() {
+  generateMonthReport() {
     if (this.selectedMonth) {
       this.serve.getAllData().subscribe((result) => {
         if (Array.isArray(result)) {
+          const orderedMonths = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ];
+
           this.gridData = result.filter((record) => {
             return record['month'].toLowerCase().trim() === this.selectedMonth.toLowerCase().trim();
+          }).sort((a, b) => {
+            return orderedMonths.indexOf(a['month']) - orderedMonths.indexOf(b['month']);
           });
+
           this.showTable = true;
           this.selectedEmployee = '';
         }
       });
     }
   }
-  generateEReport() {
+
+  generateEmpReport() {
     if (this.selectedEmployee) {
       this.serve.getAllData().subscribe((result) => {
         if (Array.isArray(result)) {
@@ -91,7 +113,7 @@ getShortName(email: string): string {
       });
     }
   }
-  
+
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
@@ -106,5 +128,7 @@ getShortName(email: string): string {
       this.routes.navigate(['/HomePage']);
     }
   }
+
+
 }
 
